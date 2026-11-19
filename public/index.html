@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dino Runner — Node.js</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <main class="app-container">
+    <header class="top-bar">
+      <div class="brand">
+        <span class="dino-badge" aria-hidden="true">🦖</span>
+        <div>
+          <h1>DINO RUNNER</h1>
+          <p class="subtitle">Node.js + HTML5 Canvas</p>
+        </div>
+      </div>
+
+      <div class="hud">
+        <button id="soundToggle" class="icon-btn" type="button" title="Alternar som" aria-label="Alternar efeitos sonoros">
+          🔊 Som
+        </button>
+        <div class="score-box">
+          <span class="score-label">HI</span>
+          <span id="highScoreDisplay" class="score-value">00000</span>
+        </div>
+        <div class="score-box current">
+          <span class="score-label">PTS</span>
+          <span id="scoreDisplay" class="score-value">00000</span>
+        </div>
+      </div>
+    </header>
+
+    <section class="stage-wrapper" aria-label="Área do jogo">
+      <canvas id="gameCanvas" width="900" height="280"></canvas>
+
+      <!-- Tela Inicial -->
+      <div id="startOverlay" class="overlay visible">
+        <div class="overlay-card">
+          <h2>Pressione <kbd>Espaço</kbd> para começar</h2>
+          <p>Desvie dos cactos e pterodáctilos! A velocidade aumenta com o tempo.</p>
+          <button id="startBtn" class="primary-btn" type="button">Iniciar Corrida</button>
+        </div>
+      </div>
+
+      <!-- Tela de Game Over -->
+      <div id="gameOverOverlay" class="overlay">
+        <div class="overlay-card">
+          <p class="game-over-tag">FIM DE JOGO</p>
+          <h2 id="finalScoreText">0 pontos</h2>
+          <p id="recordBadge" class="record-badge hidden">Novo Recorde Pessoal!</p>
+
+          <form id="scoreForm" class="score-form">
+            <label for="playerName" class="sr-only">Seu apelido</label>
+            <input
+              id="playerName"
+              name="playerName"
+              type="text"
+              maxlength="16"
+              placeholder="Seu nome no ranking"
+              autocomplete="off"
+              required
+            />
+            <button id="saveScoreBtn" type="submit" class="secondary-btn">Salvar no Ranking</button>
+          </form>
+          <p id="saveStatus" class="save-status" aria-live="polite"></p>
+
+          <button id="restartBtn" class="primary-btn" type="button">Jogar Novamente (Espaço)</button>
+        </div>
+      </div>
+    </section>
+
+    <div class="controls-bar">
+      <div class="keyboard-hints">
+        <span><kbd>Espaço</kbd> / <kbd>↑</kbd> / <kbd>W</kbd> Pular</span>
+        <span><kbd>↓</kbd> / <kbd>S</kbd> Abaixar / Queda rápida</span>
+      </div>
+      <div class="touch-controls">
+        <button id="jumpTouchBtn" type="button" class="touch-btn">⬆️ Pular</button>
+        <button id="duckTouchBtn" type="button" class="touch-btn">⬇️ Abaixar</button>
+      </div>
+    </div>
+
+    <section class="leaderboard-panel" aria-labelledby="leaderboardTitle">
+      <div class="leaderboard-header">
+        <h2 id="leaderboardTitle">🏆 Top 10 Ranking (Servidor Node.js)</h2>
+        <button id="refreshLeaderboardBtn" type="button" class="ghost-btn">Atualizar</button>
+      </div>
+      <ol id="leaderboardList" class="leaderboard-list">
+        <li class="empty-row">Carregando pontuações...</li>
+      </ol>
+    </section>
+  </main>
+
+  <script src="/game.js"></script>
+</body>
+</html>
